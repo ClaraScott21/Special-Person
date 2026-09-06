@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes" />
+  <title>💖 My Confession</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Georgia', 'Times New Roman', serif;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      margin: 0;
+      background: linear-gradient(145deg, #ffe9ec 0%, #fcd5e1 40%, #fbc4d5 100%);
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    #hearts-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .heart {
+      position: absolute;
+      bottom: -20px;
+      font-size: 20px;
+      opacity: 0.6;
+      animation: floatUp linear infinite;
+      user-select: none;
+      color: #e8728a;
+      text-shadow: 0 0 10px rgba(232, 114, 138, 0.3);
+    }
+
+    @keyframes floatUp {
+      0% {
+        transform: translateY(0) rotate(0deg) scale(1);
+        opacity: 0.6;
+      }
+      100% {
+        transform: translateY(-110vh) rotate(720deg) scale(0.2);
+        opacity: 0;
+      }
+    }
+
+    .flip-container {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 400px;
+      perspective: 1200px;
+    }
+
+    .flip-inner {
+      position: relative;
+      width: 100%;
+      padding-bottom: 140%;
+      transition: transform 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+      transform-style: preserve-3d;
+      cursor: pointer;
+    }
+
+    .flip-inner.flipped {
+      transform: rotateY(180deg);
+    }
+
+    .flip-front,
+    .flip-back {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      border-radius: 48px;
+      overflow-y: auto;
+      padding: 32px 24px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 30px 80px rgba(180, 80, 110, 0.25), 0 10px 30px rgba(0, 0, 0, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.6);
+    }
+
+    .flip-front {
+      background: rgba(255, 248, 245, 0.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      transform: rotateY(0deg);
+      text-align: center;
+    }
+
+    .photo-frame {
+      width: 65%;
+      max-width: 200px;
+      aspect-ratio: 3 / 4;
+      border-radius: 20px;
+      overflow: hidden;
+      border: 6px solid rgba(255, 255, 255, 0.95);
+      box-shadow: 0 16px 50px rgba(200, 100, 130, 0.3), 0 4px 12px rgba(0, 0, 0, 0.06);
+      margin-bottom: 28px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      animation: floatPhoto 4s ease-in-out infinite;
+    }
+
+    .photo-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    @keyframes floatPhoto {
+      0%,
+      100% {
+        transform: translateY(0px);
+      }
+      50% {
+        transform: translateY(-8px);
+      }
+    }
+
+    .flip-front:hover .photo-frame {
+      transform: scale(1.02);
+      box-shadow: 0 20px 60px rgba(200, 100, 130, 0.4);
+    }
+
+    .flip-front h2 {
+      color: #3d2a3d;
+      font-size: 22px;
+      font-weight: 700;
+      font-family: 'Georgia', serif;
+      margin-bottom: 6px;
+      letter-spacing: -0.3px;
+    }
+
+    .tap-hint {
+      color: #b0808a;
+      font-size: 14px;
+      font-weight: 400;
+      background: rgba(232, 114, 138, 0.08);
+      padding: 8px 24px;
+      border-radius: 60px;
+      border: 1px solid rgba(232, 114, 138, 0.12);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .tap-hint::after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -60%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+      transform: rotate(25deg);
+      animation: shimmer 3s infinite;
+    }
+
+    @keyframes shimmer {
+      0% {
+        transform: translateX(-100%) rotate(25deg);
+      }
+      100% {
+        transform: translateX(100%) rotate(25deg);
+      }
+    }
+
+    .flip-back {
+      background: rgba(255, 248, 245, 0.95);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      transform: rotateY(180deg);
+      justify-content: flex-start;
+      padding: 32px 24px;
+      text-align: left;
+      overflow-y: auto;
+    }
+
+    .flip-back::-webkit-scrollbar {
+      width: 3px;
+    }
+    .flip-back::-webkit-scrollbar-thumb {
+      background: #e87a9a;
+      border-radius: 10px;
+    }
+
+    .flip-back .badge {
+      display: inline-block;
+      background: linear-gradient(135deg, #f5a0b0, #e87a9a);
+      color: white;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      padding: 4px 16px;
+      border-radius: 60px;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+      font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+      box-shadow: 0 4px 15px rgba(232, 122, 154, 0.3);
+      align-self: flex-start;
+    }
+
+    .flip-back h1 {
+      color: #3d2a3d;
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 4px;
+      font-family: 'Georgia', serif;
+      align-self: flex-start;
+    }
+
+    .flip-back .sub-head {
+      color: #b0808a;
+      font-size: 14px;
+      font-weight: 400;
+      margin-bottom: 18px;
+      font-style: italic;
+      border-bottom: 1px solid rgba(200, 150, 160, 0.2);
+      padding-bottom: 14px;
+      width: 100%;
+    }
+
+    .flip-back .letter-body p {
+      color: #4a344a;
+      font-size: 15.5px;
+      line-height: 1.8;
+      margin-bottom: 14px;
+      font-weight: 400;
+    }
+
+    .flip-back .letter-body strong {
+      color: #d45a7a;
+      font-weight: 700;
+    }
+
+    .flip-back .highlight-box {
+      background: rgba(232, 114, 138, 0.07);
+      border-radius: 16px;
+      padding: 14px 18px;
+      margin: 16px 0;
+      border-left: 4px solid #e87a9a;
+      width: 100%;
+    }
+
+    .flip-back .highlight-box p {
+      margin-bottom: 0;
+      font-size: 16px;
+      font-weight: 500;
+      color: #3d2a3d;
+    }
+
+    .flip-back .signature {
+      text-align: right;
+      margin-top: 16px;
+      padding-top: 14px;
+      border-top: 2px dashed rgba(200, 150, 160, 0.2);
+      width: 100%;
+    }
+
+    .flip-back .signature p {
+      font-size: 17px;
+      font-weight: 600;
+      color: #3d2a3d;
+      margin-bottom: 2px;
+      font-family: 'Georgia', serif;
+    }
+
+    .flip-back .signature span {
+      font-size: 12px;
+      color: #b0808a;
+      font-weight: 400;
+    }
+
+    .cta-group {
+      display: flex;
+      gap: 12px;
+      margin-top: 20px;
+      flex-wrap: wrap;
+      width: 100%;
+    }
+
+    .btn-primary {
+      flex: 1;
+      min-width: 120px;
+      padding: 14px 20px;
+      background: linear-gradient(135deg, #f5a0b0, #e87a9a);
+      border: none;
+      border-radius: 60px;
+      color: white;
+      font-weight: 700;
+      font-size: 16px;
+      text-align: center;
+      text-decoration: none;
+      box-shadow: 0 6px 25px rgba(232, 122, 154, 0.35);
+      transition: 0.2s;
+      font-family: -apple-system, sans-serif;
+      cursor: pointer;
+    }
+
+    .btn-primary:active {
+      transform: scale(0.95);
+    }
+
+    .logout-link {
+      display: block;
+      margin-top: 20px;
+      font-size: 11px;
+      color: #b895a5;
+      text-decoration: none;
+      opacity: 0.4;
+      transition: 0.2s;
+      font-family: -apple-system, sans-serif;
+      align-self: center;
+    }
+
+    .logout-link:hover {
+      opacity: 1;
+    }
+
+    @media (max-width: 420px) {
+      .flip-front .photo-frame {
+        width: 55%;
+        max-width: 150px;
+      }
+      .flip-front h2 {
+        font-size: 18px;
+      }
+      .flip-back {
+        padding: 24px 18px;
+      }
+      .flip-back h1 {
+        font-size: 20px;
+      }
+      .flip-back .letter-body p {
+        font-size: 14px;
+      }
+      .flip-inner {
+        padding-bottom: 145%;
+      }
+    }
+
+    @media (max-width: 360px) {
+      .flip-front .photo-frame {
+        width: 50%;
+        max-width: 120px;
+      }
+      .flip-back .letter-body p {
+        font-size: 13px;
+        line-height: 1.6;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div id="hearts-container"></div>
+
+  <div class="flip-container">
+    <div class="flip-inner" id="flipCard">
+
+      <!-- FRONT: Her Portrait -->
+      <div class="flip-front">
+        <div class="photo-frame">
+          <img src="/images/her.png" alt="My Special Girl" />
+        </div>
+        <h2>💖 You</h2>
+        <div class="tap-hint">👆 Tap to open my heart</div>
+      </div>
+
+      <!-- BACK: The Love Letter -->
+      <div class="flip-back">
+        <span class="badge">❤️ My Confession</span>
+        <h1>I fell in love with you.</h1>
+        <div class="sub-head">And I need to tell you why.</div>
+
+        <div class="letter-body">
+          <p>
+            I don't know exactly when it happened. Maybe it was <strong>[insert a specific moment, e.g., "the way you laughed at my stupid joke" / "when you looked at me across the table" / "that night we walked in the rain"]</strong>.
+          </p>
+          <p>
+            All I know is that somewhere between <strong>[insert date or moment, e.g., "our first coffee date" / "that night we stayed up talking"]</strong> and now, you became the person I think about first in the morning and last at night.
+          </p>
+
+          <div class="highlight-box">
+            <p>
+              ✨ You make me feel things I've never felt before.<br />
+              You make me want to be better, to try harder, to love deeper.<br />
+              <strong>You make me believe in love.</strong>
+            </p>
+          </div>
+
+          <p>
+            We've been on three dates. Three incredible, unforgettable dates.<br /><br />
+            But I don't just want <em>dates</em> anymore.<br /><br />
+            I want <strong>you</strong>. I want to be the reason you smile. I want to hold your hand and call you mine.
+          </p>
+
+          <p style="font-weight: 500; color: #d45a7a; font-size: 18px; margin-top: 8px; text-align: center;">
+            So, Niki...<br />
+            <strong style="font-size: 22px;">Will you be my girlfriend?</strong>
+          </p>
+        </div>
+
+        <div class="signature">
+          <p>All my heart,</p>
+          <span>— [Your Full Name] 💫</span>
+        </div>
+
+        <div class="cta-group">
+          <a href="/propose" class="btn-primary">💖 Tell Me Your Answer →</a>
+        </div>
+
+        <a href="/logout" class="logout-link">↺ Logout (just in case)</a>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ========== MUSIC PLAYER ========== -->
+  <div id="musicPlayer" style="
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    z-index: 9999;
+    background: rgba(255, 248, 245, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-radius: 60px;
+    padding: 10px 18px 10px 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    transition: all 0.3s ease;
+  ">
+    <button id="musicToggle" style="
+      background: none;
+      border: none;
+      font-size: 22px;
+      cursor: pointer;
+      padding: 0;
+      line-height: 1;
+      transition: transform 0.2s ease;
+      color: #d45a7a;
+    ">🔊</button>
+    <div style="display: flex; flex-direction: column; align-items: flex-start;">
+      <span style="font-size: 11px; color: #b0808a; font-weight: 500; letter-spacing: 0.3px; font-family: -apple-system, sans-serif;">
+        🎵 Our Song
+      </span>
+      <div style="width: 50px; height: 3px; background: rgba(200, 150, 160, 0.2); border-radius: 10px; margin-top: 2px;">
+        <div id="musicProgress" style="width: 0%; height: 100%; background: linear-gradient(90deg, #f5a0b0, #e87a9a); border-radius: 10px; transition: width 0.3s;"></div>
+      </div>
+    </div>
+  </div>
+
+  <audio id="bgMusic" src="/music/background.mp3" loop></audio>
+
+  <script>
+    // ----- FLOATING HEARTS -----
+    (function createHearts() {
+      const container = document.getElementById('hearts-container');
+      const heartEmojis = ['❤️', '♥️', '💕', '💗', '✨', '🌸', '🩷'];
+      const numberOfHearts = 40;
+
+      for (let i = 0; i < numberOfHearts; i++) {
+        const heart = document.createElement('div');
+        heart.classList.add('heart');
+        heart.textContent = heartEmojis[Math.floor(Math.random() * heartEmojis.length)];
+
+        const size = Math.random() * 22 + 12;
+        heart.style.fontSize = size + 'px';
+        heart.style.left = Math.random() * 100 + '%';
+        heart.style.animationDuration = (Math.random() * 14 + 10) + 's';
+        heart.style.animationDelay = (Math.random() * 12) + 's';
+        heart.style.opacity = Math.random() * 0.5 + 0.2;
+
+        container.appendChild(heart);
+      }
+    })();
+
+    // ----- FLIP CARD -----
+    const flipCard = document.getElementById('flipCard');
+
+    flipCard.addEventListener('click', function(e) {
+      if (e.target.tagName === 'A') return;
+      this.classList.toggle('flipped');
+    });
+
+    console.log('💖 Tap her portrait to reveal the confession!');
+
+    // ----- MUSIC PLAYER -----
+    (function() {
+      const audio = document.getElementById('bgMusic');
+      const toggleBtn = document.getElementById('musicToggle');
+      const progressBar = document.getElementById('musicProgress');
+
+      let isFirstInteraction = true;
+      const savedTime = localStorage.getItem('bgMusicTime');
+      if (savedTime) {
+        audio.currentTime = parseFloat(savedTime);
+      }
+
+      audio.addEventListener('timeupdate', function() {
+        if (audio.duration) {
+          const percent = (audio.currentTime / audio.duration) * 100;
+          progressBar.style.width = percent + '%';
+        }
+        if (Math.floor(audio.currentTime) % 2 === 0) {
+          localStorage.setItem('bgMusicTime', audio.currentTime);
+        }
+      });
+
+      window.addEventListener('beforeunload', function() {
+        localStorage.setItem('bgMusicTime', audio.currentTime);
+      });
+
+      function startMusic() {
+        if (isFirstInteraction) {
+          audio.play().catch(function(err) {
+            console.log('Autoplay blocked. Click the toggle button to start.');
+          });
+          isFirstInteraction = false;
+        }
+      }
+
+      document.addEventListener('click', startMusic, { once: true });
+      document.addEventListener('touchstart', startMusic, { once: true });
+
+      toggleBtn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        if (audio.paused) {
+          audio.play();
+          toggleBtn.textContent = '🔊';
+        } else {
+          audio.pause();
+          toggleBtn.textContent = '🔇';
+        }
+        isFirstInteraction = false;
+      });
+
+      if (audio.paused) {
+        toggleBtn.textContent = '🔇';
+      } else {
+        toggleBtn.textContent = '🔊';
+      }
+
+      console.log('🎵 Background music loaded. Saved position:', localStorage.getItem('bgMusicTime') || '0');
+    })();
+  </script>
+
+</body>
+</html>

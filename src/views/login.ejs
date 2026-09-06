@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+  <title>💌 A Little Something for You</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', cursive, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      margin: 0;
+      background: linear-gradient(145deg, #fff5f5 0%, #fde2e4 50%, #fad2e1 100%);
+      position: relative;
+    }
+
+    body::before {
+      content: '';
+      position: absolute;
+      top: -20%;
+      right: -20%;
+      width: 300px;
+      height: 300px;
+      background: radial-gradient(circle, rgba(255, 182, 193, 0.4) 0%, transparent 70%);
+      border-radius: 50%;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    body::after {
+      content: '';
+      position: absolute;
+      bottom: -20%;
+      left: -20%;
+      width: 350px;
+      height: 350px;
+      background: radial-gradient(circle, rgba(255, 218, 185, 0.4) 0%, transparent 70%);
+      border-radius: 50%;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .card {
+      position: relative;
+      z-index: 1;
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-radius: 48px;
+      padding: 44px 32px;
+      width: 100%;
+      max-width: 380px;
+      text-align: center;
+      box-shadow: 0 20px 60px rgba(200, 120, 140, 0.2), 0 8px 20px rgba(0, 0, 0, 0.04), inset 0 1px 0 rgba(255, 255, 255, 0.8);
+      border: 1px solid rgba(255, 255, 255, 0.6);
+      transition: transform 0.3s ease;
+    }
+
+    .icon-wrapper {
+      width: 80px;
+      height: 80px;
+      background: linear-gradient(135deg, #ffe4e9, #ffd6e0);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 18px auto;
+      box-shadow: 0 8px 25px rgba(255, 150, 180, 0.3);
+      animation: floatY 4s ease-in-out infinite;
+    }
+
+    .icon-wrapper span {
+      font-size: 42px;
+      line-height: 1;
+    }
+
+    @keyframes floatY {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-8px); }
+      100% { transform: translateY(0px); }
+    }
+
+    h1 {
+      color: #3d2a3d;
+      font-size: 24px;
+      font-weight: 700;
+      letter-spacing: -0.3px;
+      margin-bottom: 6px;
+      font-family: 'Georgia', 'Times New Roman', serif;
+    }
+
+    .subtitle {
+      color: #8a6a7a;
+      font-size: 15px;
+      font-weight: 400;
+      margin-bottom: 28px;
+      padding: 0 10px;
+      line-height: 1.5;
+    }
+
+    .subtitle span {
+      color: #d45a7a;
+      font-weight: 600;
+      background: rgba(212, 90, 122, 0.08);
+      padding: 2px 12px;
+      border-radius: 40px;
+      display: inline-block;
+      margin-top: 4px;
+    }
+
+    .input-group {
+      margin-bottom: 18px;
+    }
+
+    input {
+      width: 100%;
+      padding: 18px 22px;
+      background: rgba(255, 245, 245, 0.7);
+      border: 1.5px solid rgba(212, 90, 122, 0.15);
+      border-radius: 60px;
+      color: #2d1b2d;
+      font-size: 18px;
+      text-align: center;
+      outline: none;
+      transition: all 0.3s ease;
+      font-weight: 400;
+      letter-spacing: 0.5px;
+      font-family: 'Georgia', 'Times New Roman', serif;
+    }
+
+    input::placeholder {
+      color: #b895a5;
+      font-weight: 300;
+      font-size: 15px;
+      letter-spacing: 0.3px;
+      opacity: 0.7;
+    }
+
+    input:focus {
+      border-color: #d45a7a;
+      background: rgba(255, 255, 255, 0.9);
+      box-shadow: 0 0 0 6px rgba(212, 90, 122, 0.08);
+    }
+
+    .btn-unlock {
+      width: 100%;
+      padding: 18px 22px;
+      background: linear-gradient(135deg, #f5a0b0, #e87a9a);
+      border: none;
+      border-radius: 60px;
+      color: #ffffff;
+      font-size: 18px;
+      font-weight: 600;
+      letter-spacing: 0.8px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 8px 30px rgba(232, 122, 154, 0.35);
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    }
+
+    .btn-unlock:active {
+      transform: scale(0.96);
+      box-shadow: 0 4px 15px rgba(232, 122, 154, 0.2);
+    }
+
+    .error {
+      color: #b14a6a;
+      background: rgba(255, 200, 210, 0.5);
+      backdrop-filter: blur(4px);
+      padding: 12px 18px;
+      border-radius: 60px;
+      font-size: 14px;
+      margin-top: 18px;
+      border: 1px solid rgba(255, 150, 170, 0.3);
+      display: <%= error ? 'block' : 'none' %>;
+      font-weight: 500;
+      animation: shakeFade 0.5s ease;
+    }
+
+    @keyframes shakeFade {
+      0% { opacity: 0; transform: translateX(-10px); }
+      25% { transform: translateX(8px); }
+      50% { transform: translateX(-4px); }
+      100% { opacity: 1; transform: translateX(0); }
+    }
+
+    .hint-text {
+      margin-top: 20px;
+      color: #b895a5;
+      font-size: 12px;
+      letter-spacing: 0.5px;
+      opacity: 0.6;
+    }
+
+    .hint-text span {
+      font-family: 'Georgia', serif;
+      font-style: italic;
+    }
+
+    @media (max-width: 400px) {
+      .card { padding: 32px 20px; }
+      h1 { font-size: 22px; }
+      input { font-size: 16px; padding: 16px 18px; }
+      .icon-wrapper { width: 70px; height: 70px; }
+      .icon-wrapper span { font-size: 36px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+    <div class="icon-wrapper">
+      <span>💌</span>
+    </div>
+
+    <h1>For My Special Girl</h1>
+    <p class="subtitle">
+      This page is password-protected by <span>love</span>.<br>
+      Enter the name I secretly whisper in my heart.
+    </p>
+
+    <form action="/unlock" method="POST">
+      <div class="input-group">
+        <input 
+          type="text" 
+          name="herName" 
+          placeholder="Type your name here..." 
+          autocomplete="off" 
+          autofocus
+        >
+      </div>
+      
+      <button type="submit" class="btn-unlock">
+        Open the Letter 💖
+      </button>
+
+      <% if (error) { %>
+        <div class="error"><%= error %></div>
+      <% } %>
+    </form>
+
+    <div class="hint-text">
+      <span>P.S. — If you're stuck, try the name your friends use.</span>
+    </div>
+  </div>
+
+  <!-- ========== MUSIC PLAYER ========== -->
+  <div id="musicPlayer" style="
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    z-index: 9999;
+    background: rgba(255, 248, 245, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-radius: 60px;
+    padding: 10px 18px 10px 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    transition: all 0.3s ease;
+  ">
+    <button id="musicToggle" style="
+      background: none;
+      border: none;
+      font-size: 22px;
+      cursor: pointer;
+      padding: 0;
+      line-height: 1;
+      transition: transform 0.2s ease;
+      color: #d45a7a;
+    ">🔊</button>
+    <div style="display: flex; flex-direction: column; align-items: flex-start;">
+      <span style="font-size: 11px; color: #b0808a; font-weight: 500; letter-spacing: 0.3px; font-family: -apple-system, sans-serif;">
+        🎵 Our Song
+      </span>
+      <div style="width: 50px; height: 3px; background: rgba(200, 150, 160, 0.2); border-radius: 10px; margin-top: 2px;">
+        <div id="musicProgress" style="width: 0%; height: 100%; background: linear-gradient(90deg, #f5a0b0, #e87a9a); border-radius: 10px; transition: width 0.3s;"></div>
+      </div>
+    </div>
+  </div>
+
+  <audio id="bgMusic" src="/music/background.mp3" loop></audio>
+
+  <script>
+    (function() {
+      const audio = document.getElementById('bgMusic');
+      const toggleBtn = document.getElementById('musicToggle');
+      const progressBar = document.getElementById('musicProgress');
+
+      let isFirstInteraction = true;
+      const savedTime = localStorage.getItem('bgMusicTime');
+      if (savedTime) {
+        audio.currentTime = parseFloat(savedTime);
+      }
+
+      audio.addEventListener('timeupdate', function() {
+        if (audio.duration) {
+          const percent = (audio.currentTime / audio.duration) * 100;
+          progressBar.style.width = percent + '%';
+        }
+        if (Math.floor(audio.currentTime) % 2 === 0) {
+          localStorage.setItem('bgMusicTime', audio.currentTime);
+        }
+      });
+
+      window.addEventListener('beforeunload', function() {
+        localStorage.setItem('bgMusicTime', audio.currentTime);
+      });
+
+      function startMusic() {
+        if (isFirstInteraction) {
+          audio.play().catch(function(err) {
+            console.log('Autoplay blocked. Click the toggle button to start.');
+          });
+          isFirstInteraction = false;
+        }
+      }
+
+      document.addEventListener('click', startMusic, { once: true });
+      document.addEventListener('touchstart', startMusic, { once: true });
+
+      toggleBtn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        if (audio.paused) {
+          audio.play();
+          toggleBtn.textContent = '🔊';
+        } else {
+          audio.pause();
+          toggleBtn.textContent = '🔇';
+        }
+        isFirstInteraction = false;
+      });
+
+      if (audio.paused) {
+        toggleBtn.textContent = '🔇';
+      } else {
+        toggleBtn.textContent = '🔊';
+      }
+
+      console.log('🎵 Background music loaded. Saved position:', localStorage.getItem('bgMusicTime') || '0');
+    })();
+  </script>
+
+</body>
+</html>

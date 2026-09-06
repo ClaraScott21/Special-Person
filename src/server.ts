@@ -30,7 +30,7 @@ app.use(express.json());
 // 4. Session setup (keeps her logged in so she doesn't have to retype)
 app.use(
   session({
-    secret: 'change-this-to-something-secret-like-your-crushs-birthday',
+    secret: process.env.SESSION_SECRET || 'fallback-secret-for-local-dev-only',
     resave: false,
     saveUninitialized: false,
     cookie: { secure: false, maxAge: 3600000 }, // 1 hour
@@ -39,7 +39,9 @@ app.use(
 
 // 5. Set EJS as the view engine
 app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname, 'views'));
+// FIXED: Looks in the 'src/views' folder (works on Render and locally)
+app.set('views', path.join(__dirname, '../src/views'));
+// Serve static files (images, music) from the 'public' folder
 app.use(express.static(path.join(__dirname, '../public')));
 
 // ============================================

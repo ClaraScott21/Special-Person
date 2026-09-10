@@ -301,7 +301,9 @@
       const progressBar = document.getElementById('musicProgress');
 
       let isFirstInteraction = true;
-      const savedTime = localStorage.getItem('bgMusicTime');
+
+      // ✅ sessionStorage: resets when browser closes
+      const savedTime = sessionStorage.getItem('bgMusicTime');
       if (savedTime) {
         audio.currentTime = parseFloat(savedTime);
       }
@@ -312,12 +314,12 @@
           progressBar.style.width = percent + '%';
         }
         if (Math.floor(audio.currentTime) % 2 === 0) {
-          localStorage.setItem('bgMusicTime', audio.currentTime);
+          sessionStorage.setItem('bgMusicTime', audio.currentTime);
         }
       });
 
       window.addEventListener('beforeunload', function() {
-        localStorage.setItem('bgMusicTime', audio.currentTime);
+        sessionStorage.setItem('bgMusicTime', audio.currentTime);
       });
 
       function startMusic() {
@@ -350,7 +352,7 @@
         toggleBtn.textContent = '🔊';
       }
 
-      console.log('🎵 Background music loaded. Saved position:', localStorage.getItem('bgMusicTime') || '0');
+      console.log('🎵 Music session active. Saved position:', sessionStorage.getItem('bgMusicTime') || '0');
     })();
   </script>
 

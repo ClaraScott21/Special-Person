@@ -4,47 +4,37 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
   <title>💖 The Question</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Dancing+Script:wght@400;600;700&family=Lora:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Georgia', serif;
+      font-family: 'Lora', Georgia, serif;
       min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 24px;
-      margin: 0;
+      display: flex; align-items: center; justify-content: center;
+      padding: 24px; margin: 0;
       background: linear-gradient(145deg, #ffe9ec 0%, #fcd5e1 40%, #fbc4d5 100%);
-      overflow: hidden;
-      position: relative;
+      overflow: hidden; position: relative;
     }
 
     #confetti-canvas {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      z-index: 100;
-      display: none;
+      position: fixed; top: 0; left: 0;
+      width: 100%; height: 100%;
+      pointer-events: none; z-index: 100; display: none;
     }
 
     .proposal-card {
-      position: relative;
-      z-index: 10;
+      position: relative; z-index: 10;
       background: rgba(255, 248, 245, 0.92);
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
       border-radius: 48px;
       padding: 44px 32px;
-      max-width: 420px;
-      width: 100%;
+      max-width: 420px; width: 100%;
       text-align: center;
       box-shadow: 0 30px 80px rgba(180, 80, 110, 0.25);
       border: 1px solid rgba(255, 255, 255, 0.6);
@@ -58,9 +48,7 @@
     }
 
     .ring-icon {
-      font-size: 64px;
-      display: block;
-      margin-bottom: 12px;
+      font-size: 64px; display: block; margin-bottom: 12px;
       animation: pulse 2s ease-in-out infinite;
     }
 
@@ -70,54 +58,39 @@
     }
 
     h1 {
-      color: #3d2a3d;
-      font-size: 28px;
-      font-weight: 700;
-      margin-bottom: 8px;
-      font-family: 'Georgia', serif;
+      font-family: 'Playfair Display', Georgia, serif;
+      color: #3d2a3d; font-size: 30px; font-weight: 700;
+      margin-bottom: 8px; line-height: 1.2;
     }
 
     .sub {
-      color: #b0808a;
-      font-size: 16px;
-      margin-bottom: 32px;
-      font-style: italic;
+      font-family: 'Lora', Georgia, serif;
+      color: #b0808a; font-size: 15px;
+      margin-bottom: 32px; font-style: italic;
     }
 
     .btn-group {
-      display: flex;
-      gap: 20px;
-      flex-wrap: wrap;
-      justify-content: center;
-      align-items: center;
-      min-height: 120px;
+      display: flex; gap: 20px;
+      flex-wrap: wrap; justify-content: center;
+      align-items: center; min-height: 120px;
       position: relative;
     }
 
     .btn-accept {
+      font-family: 'Playfair Display', Georgia, serif;
       padding: 20px 40px;
       background: linear-gradient(135deg, #f5a0b0, #e87a9a);
-      border: none;
-      border-radius: 60px;
-      color: white;
-      font-size: 24px;
-      font-weight: 700;
+      border: none; border-radius: 60px;
+      color: white; font-size: 24px; font-weight: 700;
       cursor: pointer;
       box-shadow: 0 8px 30px rgba(232, 122, 154, 0.4);
       transition: all 0.3s ease;
-      font-family: -apple-system, sans-serif;
-      letter-spacing: 0.5px;
-      min-width: 140px;
-      flex-shrink: 0;
+      letter-spacing: 0.5px; min-width: 140px; flex-shrink: 0;
     }
 
-    .btn-accept:active {
-      transform: scale(0.95);
-    }
+    .btn-accept:active { transform: scale(0.95); }
 
-    .btn-accept.growing {
-      animation: growPulse 0.5s ease;
-    }
+    .btn-accept.growing { animation: growPulse 0.5s ease; }
 
     @keyframes growPulse {
       0% { transform: scale(1); }
@@ -126,63 +99,38 @@
     }
 
     .btn-reject {
+      font-family: 'Lora', Georgia, serif;
       padding: 16px 32px;
       background: rgba(200, 180, 190, 0.3);
       border: 2px solid rgba(200, 180, 190, 0.4);
       border-radius: 60px;
-      color: #6a4a5a;
-      font-size: 18px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      font-family: -apple-system, sans-serif;
-      min-width: 100px;
-      flex-shrink: 0;
-      user-select: none;
-      touch-action: none;
-      position: relative;
+      color: #6a4a5a; font-size: 17px; font-weight: 600;
+      cursor: pointer; transition: all 0.3s ease;
+      min-width: 100px; flex-shrink: 0;
+      user-select: none; touch-action: none;
+      position: relative; font-style: italic;
     }
 
-    .btn-reject:active {
-      transform: scale(0.92);
-    }
-
-    .btn-reject.shrinking {
-      transform: scale(0.7) !important;
-      opacity: 0.6;
-    }
-
-    .btn-reject.tiny {
-      transform: scale(0.3) !important;
-      opacity: 0.2;
-      pointer-events: none;
-    }
+    .btn-reject:active { transform: scale(0.92); }
+    .btn-reject.shrinking { transform: scale(0.7) !important; opacity: 0.6; }
+    .btn-reject.tiny { transform: scale(0.3) !important; opacity: 0.2; pointer-events: none; }
 
     .think-again {
-      color: #d45a7a;
-      font-size: 14px;
-      font-weight: 500;
-      margin-top: 16px;
-      min-height: 30px;
-      opacity: 0;
-      transition: opacity 0.4s ease;
+      font-family: 'Dancing Script', cursive;
+      color: #d45a7a; font-size: 20px; font-weight: 700;
+      margin-top: 16px; min-height: 30px;
+      opacity: 0; transition: opacity 0.4s ease;
     }
 
-    .think-again.show {
-      opacity: 1;
-    }
+    .think-again.show { opacity: 1; }
 
     .celebration {
-      display: none;
-      margin-top: 28px;
-      padding-top: 24px;
+      display: none; margin-top: 28px; padding-top: 24px;
       border-top: 2px dashed rgba(200, 150, 160, 0.25);
       animation: revealUp 0.8s ease forwards;
     }
 
-    .celebration.show {
-      display: block;
-    }
+    .celebration.show { display: block; }
 
     @keyframes revealUp {
       0% { opacity: 0; transform: translateY(30px) scale(0.9); }
@@ -190,53 +138,110 @@
     }
 
     .celebration h2 {
-      color: #d45a7a;
-      font-size: 32px;
-      margin-bottom: 10px;
-      font-family: 'Georgia', serif;
+      font-family: 'Dancing Script', cursive;
+      color: #d45a7a; font-size: 42px;
+      margin-bottom: 10px; font-weight: 700;
     }
 
     .celebration .romantic-message {
       background: linear-gradient(135deg, rgba(232, 114, 138, 0.1), rgba(245, 160, 176, 0.1));
-      border-radius: 24px;
-      padding: 24px;
-      margin-top: 12px;
+      border-radius: 24px; padding: 24px; margin-top: 12px;
       border: 2px solid rgba(232, 114, 138, 0.2);
     }
 
     .celebration .romantic-message p {
-      color: #3d2a3d;
-      font-size: 18px;
-      line-height: 1.8;
-      font-weight: 500;
+      font-family: 'Lora', Georgia, serif;
+      color: #3d2a3d; font-size: 16px;
+      line-height: 1.8; font-weight: 400;
     }
 
     .celebration .romantic-message .big {
-      font-size: 24px;
-      color: #d45a7a;
-      font-weight: 700;
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 22px; color: #d45a7a;
+      font-weight: 700; line-height: 1.4;
+    }
+
+    .celebration .love-you {
+      font-family: 'Dancing Script', cursive;
+      font-size: 34px; color: #d45a7a;
+      font-weight: 700; margin-top: 20px;
     }
 
     .logout-link {
-      display: block;
-      margin-top: 24px;
-      font-size: 11px;
-      color: #b895a5;
-      text-decoration: none;
-      opacity: 0.3;
-      transition: 0.2s;
-      font-family: -apple-system, sans-serif;
+      font-family: 'Lora', Georgia, serif;
+      display: block; margin-top: 24px; font-size: 11px;
+      color: #b895a5; text-decoration: none;
+      opacity: 0.3; transition: 0.2s;
     }
 
-    .logout-link:hover {
-      opacity: 1;
+    .logout-link:hover { opacity: 1; }
+
+    /* ===== MUSIC PLAYING INDICATOR ===== */
+    .music-indicator {
+      position: fixed;
+      bottom: 24px; right: 24px;
+      z-index: 9999;
+      background: rgba(255, 248, 245, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-radius: 60px;
+      padding: 10px 20px 10px 18px;
+      display: flex; align-items: center; gap: 12px;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      pointer-events: none; user-select: none;
+    }
+
+    .eq-bars {
+      display: flex; align-items: flex-end; gap: 3px; height: 20px;
+    }
+
+    .eq-bars span {
+      display: block; width: 3px;
+      background: linear-gradient(180deg, #f5a0b0, #e87a9a);
+      border-radius: 3px;
+      animation: eqAnim 1s ease-in-out infinite;
+    }
+
+    .eq-bars span:nth-child(1) { height: 40%; animation-delay: 0s; }
+    .eq-bars span:nth-child(2) { height: 80%; animation-delay: 0.2s; }
+    .eq-bars span:nth-child(3) { height: 60%; animation-delay: 0.4s; }
+    .eq-bars span:nth-child(4) { height: 90%; animation-delay: 0.1s; }
+
+    @keyframes eqAnim {
+      0%, 100% { transform: scaleY(0.5); }
+      50% { transform: scaleY(1); }
+    }
+
+    .music-indicator-text {
+      display: flex; flex-direction: column; align-items: flex-start;
+    }
+
+    .music-indicator-text .label {
+      font-family: 'Dancing Script', cursive;
+      font-size: 15px; color: #b0808a; font-weight: 700;
+      letter-spacing: 0.3px;
+    }
+
+    .music-progress-track {
+      width: 50px; height: 3px;
+      background: rgba(200, 150, 160, 0.2);
+      border-radius: 10px; margin-top: 2px; overflow: hidden;
+    }
+
+    #musicProgress {
+      width: 0%; height: 100%;
+      background: linear-gradient(90deg, #f5a0b0, #e87a9a);
+      border-radius: 10px; transition: width 0.3s;
     }
 
     @media (max-width: 420px) {
       .proposal-card { padding: 32px 20px; }
-      h1 { font-size: 24px; }
+      h1 { font-size: 25px; }
       .btn-accept { font-size: 20px; padding: 16px 28px; min-width: 120px; }
-      .btn-reject { font-size: 16px; padding: 14px 24px; min-width: 80px; }
+      .btn-reject { font-size: 15px; padding: 14px 24px; min-width: 80px; }
+      .celebration h2 { font-size: 34px; }
+      .celebration .love-you { font-size: 28px; }
     }
   </style>
 </head>
@@ -251,66 +256,39 @@
     <p class="sub">Niki, I've said everything I feel.</p>
 
     <div class="btn-group" id="btnGroup">
-      <button class="btn-accept" id="btnAccept">💖 Yes</button>
-      <button class="btn-reject" id="btnReject">😅 Reject</button>
+      <button class="btn-accept" id="btnAccept"> Yes</button>
+      <button class="btn-reject" id="btnReject"> Reject</button>
     </div>
 
     <div class="think-again" id="thinkAgain">
-      💕 Hmm... are you sure? Think again, beautiful. 💕
+      Hmm... are you sure? Think again, beautiful.
     </div>
 
     <div class="celebration" id="celebration">
-      <h2>🎉 SHE SAID YES! 🎉</h2>
+      <h2>She said Yes!</h2>
       <div class="romantic-message">
         <p>
           <span class="big">💖 You just made me the happiest person alive.</span><br /><br />
           Niki, I promise to always be by your side.<br />
           I promise to make you laugh, to hold your hand, and to love you with everything I have.<br /><br />
-          <span style="font-size: 22px; color: #d45a7a;">This is just the beginning of our story. 💫</span>
+          <span style="font-family: 'Playfair Display', serif; font-size: 18px; color: #d45a7a; font-style: italic;">This is just the beginning of our story. 💫</span>
         </p>
       </div>
-      <p style="margin-top: 20px; font-size: 20px; color: #d45a7a; font-weight: 700;">
-        I love you, Niki. ❤️
-      </p>
+      <p class="love-you">I love you, Niki ❤️</p>
     </div>
 
     <a href="/logout" class="logout-link">↺ Logout</a>
   </div>
 
-  <!-- ========== MUSIC PLAYER ========== -->
-  <div id="musicPlayer" style="
-    position: fixed;
-    bottom: 24px;
-    right: 24px;
-    z-index: 9999;
-    background: rgba(255, 248, 245, 0.85);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border-radius: 60px;
-    padding: 10px 18px 10px 16px;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.4);
-    transition: all 0.3s ease;
-  ">
-    <button id="musicToggle" style="
-      background: none;
-      border: none;
-      font-size: 22px;
-      cursor: pointer;
-      padding: 0;
-      line-height: 1;
-      transition: transform 0.2s ease;
-      color: #d45a7a;
-    ">🔊</button>
-    <div style="display: flex; flex-direction: column; align-items: flex-start;">
-      <span style="font-size: 11px; color: #b0808a; font-weight: 500; letter-spacing: 0.3px; font-family: -apple-system, sans-serif;">
-        🎵 Our Song
-      </span>
-      <div style="width: 50px; height: 3px; background: rgba(200, 150, 160, 0.2); border-radius: 10px; margin-top: 2px;">
-        <div id="musicProgress" style="width: 0%; height: 100%; background: linear-gradient(90deg, #f5a0b0, #e87a9a); border-radius: 10px; transition: width 0.3s;"></div>
+  <!-- ===== MUSIC PLAYING INDICATOR ===== -->
+  <div class="music-indicator">
+    <div class="eq-bars">
+      <span></span><span></span><span></span><span></span>
+    </div>
+    <div class="music-indicator-text">
+      <span class="label">🎵 Our Song</span>
+      <div class="music-progress-track">
+        <div id="musicProgress"></div>
       </div>
     </div>
   </div>
@@ -320,12 +298,9 @@
   <script>
     (function() {
 
-      // ---- MUSIC PLAYER (sessionStorage) ----
+      // ---- MUSIC PLAYER (un-pausable) ----
       const audio = document.getElementById('bgMusic');
-      const toggleBtn = document.getElementById('musicToggle');
       const progressBar = document.getElementById('musicProgress');
-
-      let isFirstInteraction = true;
 
       const savedTime = sessionStorage.getItem('bgMusicTime');
       if (savedTime) {
@@ -347,36 +322,20 @@
       });
 
       function startMusic() {
-        if (isFirstInteraction) {
-          audio.play().catch(function(err) {
-            console.log('Autoplay blocked. Click the toggle button to start.');
-          });
-          isFirstInteraction = false;
-        }
+        audio.play().catch(function(err) { console.log('Autoplay blocked:', err); });
       }
 
       document.addEventListener('click', startMusic, { once: true });
       document.addEventListener('touchstart', startMusic, { once: true });
+      document.addEventListener('keydown', startMusic, { once: true });
 
-      toggleBtn.addEventListener('click', function(e) {
-        e.stopPropagation();
-        if (audio.paused) {
-          audio.play();
-          toggleBtn.textContent = '🔊';
-        } else {
-          audio.pause();
-          toggleBtn.textContent = '🔇';
+      audio.addEventListener('pause', function() {
+        if (!document.hidden) {
+          audio.play().catch(function(){});
         }
-        isFirstInteraction = false;
       });
 
-      if (audio.paused) {
-        toggleBtn.textContent = '🔇';
-      } else {
-        toggleBtn.textContent = '🔊';
-      }
-
-      console.log('🎵 Music session active. Saved position:', sessionStorage.getItem('bgMusicTime') || '0');
+      console.log('🎵 Music will play continuously. No stopping!');
 
       // ---- BUTTONS ----
       const btnAccept = document.getElementById('btnAccept');
@@ -416,10 +375,10 @@
         } else if (rejectClicks === 2) {
           btnReject.classList.add('tiny');
           btnReject.textContent = '😭';
-          thinkAgain.textContent = '💕 Okay but... I\'ll keep asking until you say yes. 💕';
+          thinkAgain.textContent = 'Okay but... I\'ll keep asking until you say yes.';
         } else if (rejectClicks >= 3) {
           btnReject.style.display = 'none';
-          thinkAgain.textContent = '😏 Looks like you have no choice but to say YES. 💖';
+          thinkAgain.textContent = 'Looks like you have no choice but to say YES. 💖';
         }
 
         btnAccept.classList.remove('growing');
@@ -452,12 +411,12 @@
         fireConfetti();
 
         btnAccept.disabled = true;
-        btnAccept.textContent = '💖 Already Said Yes!';
+        btnAccept.textContent = ' Already Said Yes!';
         btnAccept.style.opacity = '0.7';
 
         btnReject.disabled = true;
         btnReject.style.opacity = '0.3';
-        btnReject.textContent = '😅 Too late!';
+        btnReject.textContent = ' Too late!';
       });
 
       btnReject.addEventListener('mouseenter', function(e) {
